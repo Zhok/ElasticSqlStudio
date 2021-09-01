@@ -1,0 +1,69 @@
+﻿<Window x:Class="ElasticSqlStudio.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElasticSqlStudio.App"
+        mc:Ignorable="d"
+        Title="Elastic SQL Studio" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="_Url:" Target="{Binding ElementName=UriTextBox}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="UriTextBox" HorizontalAlignment="Left" Margin="5" Text="{Binding Url}" TextWrapping="NoWrap" VerticalAlignment="Top" Width="300"/>
+
+
+                <Label Grid.Row="1" Grid.Column="0" Content="_User:" Target="{Binding ElementName=UserTextBox}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Name="UserTextBox" HorizontalAlignment="Left" Margin="5" Text="{Binding User}" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120"/>
+
+
+                <Label Grid.Row="1" Grid.Column="2" Content="_Password:" Target="{Binding ElementName=PasswordTextBox}" />
+                <PasswordBox Grid.Row="1" Grid.Column="3" Name="PasswordTextBox" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+        </GroupBox>
+        
+
+            <Label Grid.Row="1" Grid.Column="0" Content="_Query:" Target="{Binding ElementName=QueryTextBox}" />
+        <TextBox Grid.Row="2" Grid.Column="0" Name="QueryTextBox" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Query}" />
+
+
+        <Label Grid.Row="3" Grid.Column="0" Content="_Output:" Target="{Binding ElementName=OutputTextBlock}" />
+        <TextBox Grid.Row="4" Grid.Column="0" Name="OutputTextBlock" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Output}" IsReadOnly="True" TextWrapping="Wrap" />
+
+        <Grid Grid.Row="2" Grid.Column="1" >
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" /> 
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Name="ConnectButton" Content="Connect" Padding="5" Margin="5,15" Click="ConnectButton_Click" />
+            <Button Grid.Row="1" IsEnabled="{Binding HasConnection}" Name="ValidateButton" Content="Validate" Padding="5" Margin="5,15" Click="ValidateButton_Click" />
+            <Button Grid.Row="2" IsEnabled="{Binding IsValid}" Name="ExportButton" Content="Export CSV" Padding="5" Margin="5,15" Click="ExportButton_Click" />
+        </Grid>
+        <Canvas Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2" Background="Black" Opacity="0.5" Visibility="{Binding ProgressBarVisibility}" />
+        <ProgressBar Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" Name="ProgressBar" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="True" Height="25" />
+    </Grid>
+</Window>
